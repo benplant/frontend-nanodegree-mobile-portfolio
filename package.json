@@ -1,0 +1,32 @@
+{
+  "name": "frontend-nanodegree-mobile-portfolio",
+  "version": "1.0.0",
+  "description": "Web Performance Optimization",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "load-grunt-tasks": "^3.1.0",
+    "grunt-pagespeed": "^0.4.1",
+    "ngrok": "^0.1.98"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-cssmin": "^0.11.0",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-imageoptim": "^1.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benplant/frontend-nanodegree-mobile-portfolio.git"
+  },
+  "author": "Ben Plantinga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benplant/frontend-nanodegree-mobile-portfolio/issues"
+  },
+  "homepage": "https://github.com/benplant/frontend-nanodegree-mobile-portfolio"
+}
