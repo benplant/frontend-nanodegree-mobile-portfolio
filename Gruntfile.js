@@ -4,13 +4,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
   	pkg: grunt.file.readJSON('package.json'),
   	uglify: {
-		options: {
-    		// the banner is inserted at the top of the output
-    		banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-  		},
   		dist: {
     		files: {
-      			'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+      			'js/min/ouput.js': ['js/perfmatters.js']
     		}
   		}
 	},
@@ -21,15 +17,36 @@ module.exports = function(grunt) {
   			}
   		}
   	},
+  	uncss: {
+  		dist: {
+  			files: {
+  				'css/style-uncss.css': ['index.html']
+  			}
+  		}
+  	},
   	cssmin: {
   		target: {
   			files: [{
   				expand: true,
   				cwd: 'css/',
-  				src: '*.css',
+  				src: ['*.css', '!*.min.css'],
   				dest: 'css/',
   				ext: '.min.css'
   			}]
+  		}
+  	},
+  	htmlmin: {
+  		dist: {
+  			options: {
+  				removeComments: true,
+  				collapseWhitespace: true
+  			},
+  			files: {
+  				'index.html': 'src/index.html',
+  				'project-2048.html': 'src/project-2048.html',
+  				'project-mobile.html': 'src/project-mobile.html',
+  				'project-webperf.html': 'src/project-webperf.html'
+  			}
   		}
   	},
     imageoptim: {
@@ -47,7 +64,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-imageoptim');
+  grunt.loadNpmTasks('grunt-uncss');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
   grunt.registerTask('default', ['jshint', 'imageoptim', 'uglify']);
 };
