@@ -527,16 +527,12 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-
-  // Create the basic image element once.
-  var elem = document.createElement('img');
-  elem.className = 'mover';
-  elem.src = "images/pizza78x100.png";
-  elem.style.height = "100px";
-  elem.style.width = "78px";
-
   for (var i = 0; i < 200; i++) {
-    // Only modify things that vary within the loop.
+    var elem = document.createElement('img');
+    elem.className = 'mover';
+    elem.src = "images/pizza78x100.png";
+    elem.style.height = "100px";
+    elem.style.width = "78px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
