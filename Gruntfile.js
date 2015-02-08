@@ -27,7 +27,7 @@ module.exports = function(grunt) {
   		dist: {
     		files: {
       			'src/js/perfmatters.min.js': ['src/js/perfmatters.js'],
-      			'views/js/main.min.js': ['views/js/main.js']
+      			'views/js/main.min.js': ['views/src/js/main.js']
     		}
   		}
 	},
@@ -48,12 +48,7 @@ module.exports = function(grunt) {
   				ext: '.min.css'
   			},
   			{
-  				expand: true,
-  				keepSpecialComments: 0,
-  				cwd: 'views/css/',
-  				src: ['*.css', '!*.min.css'],
-  				dest: 'views/css/',
-  				ext: '.min.css'
+  				'views/src/css/pizza.min.css': ['views/src/css/bootstrap-grid.css', 'views/src/css/style.css']
   			}],
   			options: {
       			keepSpecialComments: 0
@@ -67,6 +62,12 @@ module.exports = function(grunt) {
 	            cwd:  'src/',
 	            src: ['*.html'],
 	            dest: 'src/inlined/'
+	        },
+	        {
+	        	expand: true,
+	            cwd:  'views/src/',
+	            src: ['pizza.html'],
+	            dest: 'views/src/inlined/'
 	        }]
 	    }
   	},
@@ -81,7 +82,7 @@ module.exports = function(grunt) {
   				'project-2048.html': 'src/inlined/project-2048.html',
   				'project-mobile.html': 'src/inlined/project-mobile.html',
   				'project-webperf.html': 'src/inlined/project-webperf.html',
-  				'views/pizza.html': 'views/src/pizza.html'
+  				'views/pizza.html': 'views/src/inlined/pizza.html'
   			}
   		}
   	},

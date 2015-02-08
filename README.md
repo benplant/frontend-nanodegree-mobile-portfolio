@@ -1,8 +1,10 @@
 ## Website Performance Optimization portfolio project
 
+***
+
 My project optimizing a portfolio website for the Udacity [Critical Rendering Path course](https://www.udacity.com/course/ud884).
 
-The goal of the project is to optimize the critical rendering path and make this page render as quickly as possible.
+I completed this project using techniques to optimize HTML, CSS and JavaScript in order to improve website page speed and user experience for both mobile and desktop environments.
 
 For testing I ran the site on a local server:
 ```
@@ -14,11 +16,21 @@ and ran ngrok to access it remotely:
 $> ngrok 8080
 ```
 
-### Part 1: Optimize PageSpeed Insights score for index.html
+***
 
-Goal is a PageSpeed Insights score of 90 or above.
+## Part 1: Optimize PageSpeed Insights score for index.html
 
-To achieve this I performed the following optimizations / changes:
+**Goal of Part 1:**
+
+* Identify and perform optimizations to achieve a PageSpeed score of 90 for index.html.
+* Identify and perform optimizations impacting content efficiency.
+
+**Bonus:**
+
+* Identify and perform optimizations to achieve a PageSpeed score above 90 for index.html.
+* Research, identify and use build tools (Grunt) to automatically perform content efficiency optimizations.
+
+**To achieve this I performed the following optimizations / changes:**
 
  * Loaded JavaScript files asynchonously (Google Analytics)
  * Used a media query for print.css
@@ -38,13 +50,19 @@ To achieve this I performed the following optimizations / changes:
  * grunt-contrib-htmlmin --> Minify HTML
  * Added a src/ folder to contain pre-minified html/css/js files
  * Enjoyed using the grunt tasks to incrementally improve results
+ * Used grunt-pagespeed to automate command line PageSpeed Insights results
 
 I moved the development versions of the HTML/CSS/Javascript files into a src directory and src/css, src/js subdirectories.  The grunt tasks automate the process of minifying CSS and Javascript (grunt-contrib-uglify & grunt-contrib-cssmin), inlining selected CSS and Javascript (grunt-inline), inlining the HTML (grunt-contrib-htmlmin) and moving the release files into their final locations.
 
-Ultimately achieved a PageSpeed Insights score of 96
-Yay - 96 PageSpeed score -- Success!
+**Results:**
+
+* Ultimately achieved a mobile PageSpeed Insights score of 96
+* Yay - 96 PageSpeed score -- Success!
+
 ![Pagespeed Success](img/pagespeed_success.png)
 
+* An automated Grunt pipeline to easily make further optimizations and see immediate PageSpeed results in the terminal.
+* Note: I did not optimize the backend/server (browser caching and server response time) as this was not possible using the SimpleHTTPServer and ngrok tools.
 
 ### Resources Used For Part 1:
 
@@ -72,8 +90,6 @@ Very few CSS selectors removed.
 * [Detecting Critical CSS for above the fold content](http://addyosmani.com/blog/detecting-critical-above-the-fold-css-with-paul-kinlan-video/)
 * [Bookmarkleter](http://chriszarate.github.io/bookmarkleter/)
 Ran on page to detect above the fold css. As virutally the entire page is visible, all the CSS is required to render the above-the-fold content. :)  Good reference for larger pages though!
-* [Minimize and compress CSS - csscompressor](http://csscompressor.com/)
-Used this page to create a minimized and compressed version of style.css that was inlined into index.html
 
 **Webfonts**
 
@@ -97,13 +113,65 @@ I moved to using Grunt to automate a number of the optimization tasks.
 
 PageSpeed Insights - [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
 
-####Part 2: Optimize Frames per Second in pizza.html
+***
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js.
+##Part 2: Optimize Frames per Second in pizza.html
 
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
+**Goal of Part 2:**
 
-### Optimization Resources - Tips and Tricks
+* Identify and perform optimizations ensuring a consistent frame rate at 60fps when scrolling in pizza.html
+* Time to resize pizzas is less than 5 ms in pizza.html shown in the browser console.
+* Identify and perform optimizations impacting content efficiency.
+
+**Bonus:**
+
+* Research, identify and use build tools (Grunt) to automatically perform content efficiency optimizations.
+
+**To achieve this I performed the following optimizations / changes:**
+
+ * Primary optimizations included changes to main.js to remove unnecessary work from 'for' loops
+ * Wrote a new function determineNewWidth(size) to do a much simpler width calculation when resizing pizzas.
+ * Used a smaller/optimized version of pizzeria.jpg
+ * Optimized image sizes
+ * Used uncss to remove any unnecessary CSS selectors (bootstrap-grid)
+ * Moved to using Grunt to more easily make optimizations
+ * grunt-imageoptim --> optimized images
+ * grunt-uncss --> remove unnecessary CSS
+ * grunt-contrib-uglify --> Minify Javascript
+ * grunt-contrib-cssmin --> Minify CSS
+ * Inlined a minified version of the critical CSS
+ * grunt-inline --> automate inlining of CSS
+ * grunt-contrib-htmlmin --> Minify HTML
+ * Added a src/ folder to contain pre-minified html/css/js files
+
+
+I moved the development versions of the HTML/CSS/Javascript files into a view/src directory and view/src/css, view/src/js subdirectories.  The grunt tasks automate the process of minifying CSS and Javascript (grunt-contrib-uglify & grunt-contrib-cssmin), inlining the CSS (grunt-inline), inlining the HTML (grunt-contrib-htmlmin) and moving the release files into their final locations.
+
+**Results:**
+
+* A consistent frame rate at or above 60fps when scrolling in pizza.html
+
+![Scrolling FPS](views/images/scrolling_fps.png)
+
+* Time to resize pizzas is less than 5 ms in pizza.html shown in the browser console. (about 0.23 ms)
+
+![Pizza Resize](views/images/pizza_resize.png)
+
+* An automated Grunt pipeline to easily make further optimizations.
+
+### Resources Used For Part 2:
+
+**Primary Course**
+
+* [Udacity Website Optimization Course](https://www.udacity.com/course/ud884)
+
+**Additional videos**
+
+* [Office Hours: P4 and Nanodegree Program Questions](https://plus.google.com/events/comnga3cdvrpkjm7dvb4l71ph2o?authkey=CPbhlNSdtpiEDg)
+* [Office Hours: P3 and P4, Strategies for Web Optimization](https://plus.google.com/events/cjk2bief153ofdink5eln6nv8f8)
+
+**Optimization Resources - Tips and Tricks**
+
 * [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
 * [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
 * [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
@@ -114,19 +182,6 @@ You might find the FPS Counter/HUD Display useful in Chrome developer tools desc
 * [Reduce the size of text](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html)
 * [Optimize images](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html)
 * [HTTP caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html)
-
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
-
-* [Bootstrap's CSS Classes](http://getbootstrap.com/css/)
-* [Bootstrap's Components](http://getbootstrap.com/components/)
-
-
-Other References:
-Office Hours:
-https://plus.google.com/events/comnga3cdvrpkjm7dvb4l71ph2o?authkey=CPbhlNSdtpiEDg
-
-[User Timing API](http://www.html5rocks.com/en/tutorials/webperformance/usertiming/)
-
-Reduce PNG size - [pngmini](http://pngmini.com/)
-
+* [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks) - FPS Counter/HUD Display
+* [User Timing API](http://www.html5rocks.com/en/tutorials/webperformance/usertiming/)
+* [pngmini](http://pngmini.com/) - tool to reduce PNG size
