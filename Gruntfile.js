@@ -13,14 +13,20 @@ module.exports = function(grunt) {
   	uncss: {
   		dist: {
   			files: {
+  				'src/css/style-uncss.css': ['src/index.html'],
   				'views/css/style-uncss.css': ['views/pizza.html']
   			}
   		}
   	},
-  	uglify: {
+  	imageoptim: {
+  		myTask: {
+    		src: ['img', 'views/images']
+  		}
+	},
+	uglify: {
   		dist: {
     		files: {
-      			'js/perfmatters.min.js': ['js/perfmatters.js'],
+      			'src/js/perfmatters.min.js': ['src/js/perfmatters.js'],
       			'views/js/main.min.js': ['views/js/main.js']
     		}
   		}
@@ -29,8 +35,15 @@ module.exports = function(grunt) {
   		target: {
   			files: [{
   				expand: true,
-  				cwd: 'css/',
-  				src: ['*.css', '!*.min.css'],
+  				cwd: 'src/css/',
+  				src: 'style.css',
+  				dest: 'src/css/',
+  				ext: '.min.css'
+  			},
+  			{
+  				expand: true,
+  				cwd: 'src/css/',
+  				src: 'print.css',
   				dest: 'css/',
   				ext: '.min.css'
   			},
@@ -47,6 +60,16 @@ module.exports = function(grunt) {
       		}
   		}
   	},
+  	inline: {
+  		dist: {
+	  		files: [{
+	            expand: true,
+	            cwd:  'src/',
+	            src: ['*.html'],
+	            dest: 'src/inlined/'
+	        }]
+	    }
+  	},
   	htmlmin: {
   		dist: {
   			options: {
@@ -54,32 +77,28 @@ module.exports = function(grunt) {
   				collapseWhitespace: true
   			},
   			files: {
-  				'index.html': 'src/index.html',
-  				'project-2048.html': 'src/project-2048.html',
-  				'project-mobile.html': 'src/project-mobile.html',
-  				'project-webperf.html': 'src/project-webperf.html',
+  				'index.html': 'src/inlined/index.html',
+  				'project-2048.html': 'src/inlined/project-2048.html',
+  				'project-mobile.html': 'src/inlined/project-mobile.html',
+  				'project-webperf.html': 'src/inlined/project-webperf.html',
   				'views/pizza.html': 'views/src/pizza.html'
   			}
   		}
   	},
-    imageoptim: {
-  		myTask: {
-    		src: ['img', 'views/images']
-  		}
-	},
-	watch: {
+    watch: {
 		files: ['<%= jshint.files %>'],
 		tasks: ['jshint']
 	}
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-imageoptim');
   grunt.loadNpmTasks('grunt-uncss');
+  grunt.loadNpmTasks('grunt-imageoptim');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-inline');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['imageoptim', 'uglify', 'cssmin', 'htmlmin']);
+  grunt.registerTask('default', ['imageoptim', 'uglify', 'cssmin', 'inline', 'htmlmin']);
 };
