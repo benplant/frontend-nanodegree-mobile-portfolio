@@ -93,6 +93,7 @@ I moved to using Grunt to automate a number of the optimization tasks.
 * [grunt-contrib-cssmin](https://github.com/gruntjs/grunt-contrib-cssmin) - task to minify css
 * [grunt-inline](https://github.com/chyingp/grunt-inline) - task to inline critical CSS and Javascript
 * [grunt-contrib-htmlmin](https://github.com/gruntjs/grunt-contrib-htmlmin) - task to minify HTML
+* [grunt-pagespeed](https://github.com/jrcryer/grunt-pagespeed/) - task to automate Google PageSpeed Insights
 
 PageSpeed Insights - [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
 

@@ -88,6 +88,28 @@ module.exports = function(grunt) {
     watch: {
 		files: ['<%= jshint.files %>'],
 		tasks: ['jshint']
+	},
+	pagespeed: {
+  		options: {
+    		nokey: true,
+    		url: "https://developers.google.com"
+  		},
+  		prod: {
+    		options: {
+      		url: "http://955de44.ngrok.com/",
+      		locale: "en_US",
+      		strategy: "mobile",
+      		threshold: 90
+    		}
+  		},
+  		paths: {
+    		options: {
+      		paths: ["/views/pizza.html"],
+      		locale: "en_US",
+      		strategy: "desktop",
+      		threshold: 90
+  	  		}
+  		}
 	}
   });
 
@@ -99,6 +121,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-inline');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-pagespeed');
 
-  grunt.registerTask('default', ['imageoptim', 'uglify', 'cssmin', 'inline', 'htmlmin']);
+  grunt.registerTask('default', ['imageoptim', 'uglify', 'cssmin', 'inline', 'htmlmin', 'pagespeed']);
 };
