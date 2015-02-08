@@ -3,15 +3,8 @@ module.exports = function(grunt) {
   // Grunt configuration
   grunt.initConfig({
   	pkg: grunt.file.readJSON('package.json'),
-  	uglify: {
-  		dist: {
-    		files: {
-      			'js/min/ouput.js': ['js/perfmatters.js']
-    		}
-  		}
-	},
   	jshint: {
-  		files: ['Gruntfile.js', 'js/*.js'],
+  		files: ['Gruntfile.js', 'js/*.js', 'views/js/*.js'],
   		options: {
   			globals: {
   			}
@@ -20,10 +13,18 @@ module.exports = function(grunt) {
   	uncss: {
   		dist: {
   			files: {
-  				'css/style-uncss.css': ['index.html']
+  				'views/css/style-uncss.css': ['views/pizza.html']
   			}
   		}
   	},
+  	uglify: {
+  		dist: {
+    		files: {
+      			'js/perfmatters.min.js': ['js/perfmatters.js'],
+      			'views/js/main.min.js': ['views/js/main.js']
+    		}
+  		}
+	},
   	cssmin: {
   		target: {
   			files: [{
@@ -32,7 +33,18 @@ module.exports = function(grunt) {
   				src: ['*.css', '!*.min.css'],
   				dest: 'css/',
   				ext: '.min.css'
-  			}]
+  			},
+  			{
+  				expand: true,
+  				keepSpecialComments: 0,
+  				cwd: 'views/css/',
+  				src: ['*.css', '!*.min.css'],
+  				dest: 'views/css/',
+  				ext: '.min.css'
+  			}],
+  			options: {
+      			keepSpecialComments: 0
+      		}
   		}
   	},
   	htmlmin: {
@@ -45,7 +57,8 @@ module.exports = function(grunt) {
   				'index.html': 'src/index.html',
   				'project-2048.html': 'src/project-2048.html',
   				'project-mobile.html': 'src/project-mobile.html',
-  				'project-webperf.html': 'src/project-webperf.html'
+  				'project-webperf.html': 'src/project-webperf.html',
+  				'views/pizza.html': 'views/src/pizza.html'
   			}
   		}
   	},
@@ -68,5 +81,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
-  grunt.registerTask('default', ['jshint', 'imageoptim', 'uglify']);
+  grunt.registerTask('default', ['imageoptim', 'uglify', 'cssmin', 'htmlmin']);
 };
