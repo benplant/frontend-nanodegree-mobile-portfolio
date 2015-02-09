@@ -59,7 +59,7 @@ I moved the development versions of the HTML/CSS/Javascript files into a src dir
 * Ultimately achieved a mobile PageSpeed Insights score of 96
 * Yay - 96 PageSpeed score -- Success!
 
-![Pagespeed Success](img/pagespeed_success.png)
+![Pagespeed Success](src/readme_images/pagespeed_success.png)
 
 * An automated Grunt pipeline to easily make further optimizations and see immediate PageSpeed results in the terminal.
 * Note: I did not optimize the backend/server (browser caching and server response time) as this was not possible using the SimpleHTTPServer and ngrok tools.
@@ -151,11 +151,11 @@ I moved the development versions of the HTML/CSS/Javascript files into a view/sr
 
 * A consistent frame rate at or above 60fps when scrolling in pizza.html
 
-![Scrolling FPS](views/images/scrolling_fps.png)
+![Scrolling FPS](src/readme_images/scrolling_fps.png)
 
 * Time to resize pizzas is less than 5 ms in pizza.html shown in the browser console. (about 0.23 ms)
 
-![Pizza Resize](views/images/pizza_resize.png)
+![Pizza Resize](src/readme_images/pizza_resize.png)
 
 * An automated Grunt pipeline to easily make further optimizations.
 
